@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="nl" style="background:#f6f3f1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#25282f">
+<title>Zur Nürburg — Menukaart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grenze:wght@400;500;600&family=Karla:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light only;
+  --stone:#f6f3f1; --stone-2:#ebe6e3; --white:#fffdfc;
+  --basalt:#25282f; --basalt-2:#353941;
+  --ink:#202228; --ink-2:#67696f; --line:#dcd8d5;
+  --ahr:#b42c2c; --ahr-soft:#f7e8e6; --ahr-ink:#8e2323;
+  --cream:#f3ece2; --cream-2:#b9ad9d;
+  --green:#3f7a4a; --green-soft:#e6f0e6;
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;background:var(--stone)}
+body{margin:0;background:var(--stone)!important;color:var(--ink);font:400 16px/1.45 Karla,system-ui,sans-serif;font-feature-settings:"tnum" 1;overscroll-behavior-y:none}
+#app{background:var(--stone);color:var(--ink);min-height:100dvh;position:relative}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--ahr);outline-offset:2px}
+h1,h2,h3{margin:0;font-family:Grenze,serif;font-weight:500;letter-spacing:.005em}
+svg{display:block}
+[hidden]{display:none!important}
+
+/* ---------- hero ---------- */
+.hero{background:var(--basalt);color:var(--cream);padding:calc(var(--sat) + 12px) 20px 26px;position:relative}
+.hero .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.hero .table{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--cream-2)}
+.hero .table b{font-weight:600;color:var(--cream)}
+.hero .table i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#6fae7a;box-shadow:0 0 0 3px rgba(111,174,122,.25)}
+.hero .tools{display:flex;gap:6px;align-items:center}
+.ic{width:38px;height:38px;border-radius:50%;background:var(--basalt-2);display:grid;place-items:center;color:var(--cream)}
+.ic svg{width:19px;height:19px}
+.lang{position:relative}
+.langbtn{display:flex;align-items:center;gap:6px;height:38px;padding:0 9px 0 10px;border-radius:999px;background:var(--basalt-2);color:var(--cream);font-size:13px;font-weight:600}
+.langbtn .chev{width:14px;height:14px;color:var(--cream-2);transition:transform .2s}
+.langbtn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.langbtn .flag svg{transform:none!important}
+.flag{display:inline-block;width:20px;height:14px;border-radius:3px;overflow:hidden;flex:0 0 auto;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.flag svg{width:100%;height:100%}
+.langmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:172px;background:var(--white);color:var(--ink);border-radius:14px;padding:6px;box-shadow:0 14px 34px -8px rgba(0,0,0,.45),0 0 0 1px var(--line);z-index:30;transform-origin:top right;animation:pop .16s ease-out}
+@keyframes pop{from{opacity:0;transform:scale(.94) translateY(-4px)}}
+.langmenu button{display:flex;align-items:center;gap:11px;width:100%;height:44px;padding:0 12px;border-radius:9px;font-size:15px;font-weight:500;text-align:left}
+.langmenu button[aria-selected="true"]{background:var(--stone-2)}
+.langmenu button[aria-selected="true"]::after{content:"";margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--ahr)}
+.hero .logo{display:block;width:236px;height:auto;margin:34px auto 0}
+.hero p{margin:18px auto 0;max-width:30ch;text-align:center;font-size:14.5px;color:var(--cream-2);line-height:1.5}
+.infolink{display:block;margin:14px auto 0;font-size:13.5px;color:var(--cream-2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(185,173,157,.45)}
+.infolink:active{color:var(--cream)}
+
+/* ---------- sticky nav ---------- */
+.nav{position:sticky;top:0;z-index:20;background:var(--stone);border-bottom:1px solid var(--line);display:flex;gap:8px;padding:8px 16px;align-items:center}
+.catbtn{flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:8px;height:42px;padding:0 12px 0 14px;border-radius:12px;background:var(--basalt);color:var(--cream);font-weight:600;font-size:15px}
+.catbtn .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.catbtn svg{width:16px;height:16px;flex:0 0 auto}
+.seg{display:flex;background:var(--stone-2);border-radius:12px;padding:3px;flex:0 0 auto}
+.seg button{padding:0 13px;height:36px;border-radius:9px;font-weight:600;font-size:14px;color:var(--ink-2);transition:background .15s,color .15s}
+.seg button[aria-pressed="true"]{background:var(--white);color:var(--ink);box-shadow:0 1px 3px rgba(35,30,29,.12)}
+/* category sheet */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.cgrid button{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:12px 12px 12px;min-height:88px;border-radius:14px;background:var(--white);border:1px solid var(--line);text-align:left;font-family:Grenze,serif;font-size:18px;line-height:1.1;transition:transform .12s}
+.cgrid button:active{transform:scale(.97)}
+.cgrid button i{width:38px;height:38px;border-radius:10px;background:var(--stone-2);display:grid;place-items:center;color:var(--ink)}
+.cgrid button i svg{width:22px;height:22px}
+.cgrid button span{display:flex;flex-direction:column;gap:1px}
+.cgrid button small{font-family:Karla;font-size:12px;color:var(--ink-2)}
+.cgrid button[aria-current="true"]{background:var(--basalt);border-color:var(--basalt);color:var(--cream)}
+.cgrid button[aria-current="true"] i{background:var(--basalt-2);color:var(--cream)}
+.cgrid button[aria-current="true"] small{color:var(--cream-2)}
+.cgrid .filt{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:space-between;min-height:48px;font-family:Karla;font-size:15px;font-weight:500}
+.cgrid .filt[data-state="veggie"],.cgrid .filt[data-state="vegan"]{background:var(--green-soft);border-color:var(--green);color:var(--green)}
+.sheet h2.grpT{font-family:Karla;font-size:13px;font-weight:600;color:var(--ink-2);margin-top:18px}
+.chip{display:none}
+
+/* ---------- menu ---------- */
+main{padding:4px 0 128px;background:var(--stone)}
+section.cat{padding:22px 20px 6px;scroll-margin-top:66px}
+section.cat h2{font-size:32px;line-height:1;margin-bottom:4px}
+section.cat h3{font-size:21px;margin:20px 0 2px;color:var(--ahr-ink)}
+.item{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:13px 0;border-bottom:1px solid var(--line);align-items:start;position:relative}
+.item:last-child{border-bottom:0}
+.item .main{text-align:left;min-width:0;display:block;width:100%}
+.item .t{font-weight:500;font-size:16.5px;line-height:1.3;display:block}
+.item .t .n{color:var(--ink-2);font-weight:400;font-size:13px;margin-right:6px}
+.item .d{display:block;color:var(--ink-2);font-size:14px;line-height:1.4;margin-top:2px}
+.item .vs{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:5px;font-size:13px;color:var(--ink-2)}
+.item .vs b{font-weight:500;color:var(--ink)}
+.item .side{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.item .p{text-align:right;font-weight:500;font-size:16px;white-space:nowrap;padding-top:1px;line-height:1.3}
+.item .p small{display:block;color:var(--ink-2);font-weight:400;font-size:12px}
+.tags{display:inline-flex;gap:4px;vertical-align:1px;margin-left:6px}
+.tag{display:inline-grid;place-items:center;height:17px;min-width:17px;padding:0 4px;border-radius:9px;font-size:10px;font-weight:600;line-height:1;color:var(--green);background:var(--green-soft);font-family:Karla}
+.add{width:34px;height:34px;border-radius:50%;background:var(--white);border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);font-size:22px;line-height:1;transition:transform .12s}
+.add:active{transform:scale(.9)}
+.add.bump{animation:bump .3s}
+.add.has{background:var(--ahr);border-color:var(--ahr);color:#fff;font-size:14px;font-weight:600}
+.item.hidden{display:none}
+.empty{color:var(--ink-2);font-size:14px;padding:10px 0 4px}
+footer.note{padding:34px 20px 0;color:var(--ink-2);font-size:13px;line-height:1.5}
+.credit{display:block;margin-top:18px;font-size:11.5px;letter-spacing:.04em;color:#9a9ca2}
+
+/* ---------- bar ---------- */
+.bar{position:fixed;left:16px;right:16px;bottom:calc(var(--sab) + 16px);z-index:30;transform:translateY(150%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.bar.show{transform:none}
+.bar button{width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--ahr);color:#fff;padding:14px 18px 14px 14px;border-radius:16px;font-weight:500;font-size:16px;box-shadow:0 12px 28px -10px rgba(180,44,44,.55)}
+.bar button.status{background:var(--basalt);box-shadow:0 12px 28px -10px rgba(42,36,35,.6)}
+.bar .cnt{display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.18);font-size:14px;padding:0 7px;margin-right:12px}
+.bar .cnt.bump{animation:bump .3s}
+@keyframes bump{40%{transform:scale(1.25)}}
+.bar .l{display:flex;align-items:center}
+.pulse{width:8px;height:8px;border-radius:50%;background:#6fae7a;margin-right:10px;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 5px rgba(111,174,122,.25)}}
+
+/* ---------- sheets ---------- */
+.veil{position:fixed;inset:0;background:rgba(35,30,29,.5);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+.veil.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--stone);color:var(--ink);border-radius:22px 22px 0 0;max-height:calc(100dvh - 32px);display:flex;flex-direction:column;transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1);padding-bottom:var(--sab)}
+.sheet.on{transform:none}
+.sheet .grab{width:38px;height:4px;border-radius:2px;background:var(--line);margin:10px auto 0;flex:0 0 auto}
+.sheet .body{overflow-y:auto;padding:12px 20px 12px;-webkit-overflow-scrolling:touch}
+.sheet .foot{padding:12px 20px 16px;border-top:1px solid var(--line);background:var(--stone);flex:0 0 auto}
+.sheet h2{font-size:30px;line-height:1.05;padding-right:40px}
+.sheet .desc{color:var(--ink-2);font-size:15px;margin:6px 0 0}
+.grp{margin-top:18px}
+.gl{font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:8px;display:flex;justify-content:space-between}
+.opt{display:flex;justify-content:space-between;align-items:center;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--white);margin-bottom:6px;font-size:15px;text-align:left;min-height:48px}
+.opt[aria-checked="true"]{border-color:var(--basalt);box-shadow:inset 0 0 0 1px var(--basalt)}
+.opt .dot{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line);margin-right:12px;flex:0 0 auto;display:grid;place-items:center}
+.opt[aria-checked="true"] .dot{border-color:var(--basalt);background:var(--basalt)}
+.opt[aria-checked="true"] .dot::after{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+.opt .ol{display:flex;align-items:center;flex:1}
+textarea,input[type=text],input[type=search]{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:16px;background:var(--white);color:var(--ink);-webkit-appearance:none}
+textarea{resize:none;min-height:64px}
+.addrow{display:flex;gap:10px}
+.stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:14px;background:var(--white)}
+.stepper button{width:46px;height:52px;font-size:22px;color:var(--ink)}
+.stepper span{min-width:26px;text-align:center;font-weight:600}
+.cta{flex:1;background:var(--basalt);color:var(--cream);border-radius:14px;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-weight:500;font-size:16px}
+.cta.ahr{background:var(--ahr);color:#fff}
+.x{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;background:var(--stone-2);display:grid;place-items:center;z-index:1}
+.x svg{width:15px;height:15px}
+
+/* order */
+.line{display:grid;grid-template-columns:auto 1fr auto;gap:0 12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.line.simple{grid-template-columns:1fr auto}
+.line .q{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--white)}
+.line .q button{width:32px;height:32px;font-size:17px;line-height:1}
+.line .q span{font-size:14px;font-weight:600;min-width:18px;text-align:center}
+.line .lt{font-weight:500}
+.line .ls{color:var(--ink-2);font-size:13.5px;margin-top:2px}
+.line .lp{font-weight:500;white-space:nowrap}
+.tot{display:flex;justify-content:space-between;padding:14px 0 2px;font-size:17px;font-weight:600}
+.tot small{color:var(--ink-2);font-weight:400;font-size:13px;display:block}
+.tbl{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;border-radius:12px;background:var(--stone-2);margin-top:14px;font-size:15px}
+.tbl b{font-weight:600}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pay .opt{margin:0;flex-direction:column;align-items:flex-start;gap:2px}
+.pay .opt small{color:var(--ink-2);font-size:12.5px}
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.svc button{padding:14px;border-radius:12px;background:var(--white);border:1px solid var(--line);font-weight:500;font-size:15px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:74px}
+.svc button small{color:var(--ink-2);font-weight:400;font-size:13px}
+.svc button.on{border-color:var(--green);background:var(--green-soft);color:var(--green)}
+.svc button.on small{color:var(--green)}
+
+/* info */
+.hours{border:1px solid var(--line);border-radius:12px;background:var(--white);overflow:hidden}
+.hrow{display:flex;justify-content:space-between;padding:10px 14px;font-size:15px;border-bottom:1px solid var(--line)}
+.hrow:last-child{border-bottom:0}
+.hrow.today{background:var(--green-soft);font-weight:600;color:var(--green)}
+.ctas{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ctas a{display:flex;flex-direction:column;gap:2px;padding:13px 14px;border-radius:12px;background:var(--basalt);color:var(--cream);text-decoration:none;font-weight:600;font-size:15px}
+.ctas a small{font-weight:400;font-size:12.5px;color:var(--cream-2)}
+.more{display:flex;flex-direction:column;gap:2px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.more:last-child{border-bottom:0}
+.more b{font-weight:600}.more span{color:var(--ink-2)}.more a{color:var(--ahr)}
+/* status */
+.done{text-align:center;padding:22px 4px 4px}
+.done h2{font-size:34px;padding:0}
+.done p{color:var(--ink-2);margin:6px auto 0;max-width:28ch}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);margin:22px 0 6px;position:relative}
+.steps::before{content:"";position:absolute;left:16.6%;right:16.6%;top:13px;height:2px;background:var(--line)}
+.steps::after{content:"";position:absolute;left:16.6%;top:13px;height:2px;background:var(--green);width:calc(66.6% * var(--pg,0));transition:width .6s}
+.step{position:relative;text-align:center;font-size:12.5px;color:var(--ink-2)}
+.step i{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--stone);border:2px solid var(--line);margin:0 auto 6px;color:transparent;transition:.3s}
+.step i svg{width:14px;height:14px}
+.step.done i{background:var(--green);border-color:var(--green);color:#fff}
+.step.cur i{border-color:var(--green);color:var(--green)}
+.step.cur{color:var(--ink);font-weight:600}
+.num{display:inline-block;margin-top:8px;padding:6px 12px;border-radius:10px;background:var(--stone-2);font-size:13px;color:var(--ink-2)}
+.num b{color:var(--ink);font-family:Grenze;font-size:19px;font-weight:500;margin-left:6px}
+.hist{margin-top:20px;border-top:1px solid var(--line);padding-top:4px;text-align:left}
+.res{padding:4px 0}
+
+.toast{position:fixed;left:50%;top:calc(var(--sat) + 14px);transform:translate(-50%,-16px);background:var(--basalt);color:var(--cream);padding:11px 16px;border-radius:12px;font-size:14px;font-weight:500;z-index:60;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (min-width:520px){#app,.sheet{max-width:480px;margin-left:auto;margin-right:auto}.bar{left:50%;right:auto;width:448px;transform:translate(-50%,150%)}.bar.show{transform:translate(-50%,0)}}
+</style>
+</head>
+<body><div id="app">
+
+<header class="hero">
+  <div class="top">
+    <div class="table"><i></i><span data-i="table"></span>&nbsp;<b id="tblNo">12</b></div>
+    <div class="tools">
+      <div class="lang">
+        <button class="langbtn" id="langBtn" aria-haspopup="listbox" aria-expanded="false"><span class="flag" id="langFlag"></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="langmenu" id="langMenu" role="listbox" hidden>
+          <button role="option" data-lang="nl"><span class="flag" data-flag="nl"></span>Nederlands</button>
+          <button role="option" data-lang="de"><span class="flag" data-flag="de"></span>Deutsch</button>
+          <button role="option" data-lang="en"><span class="flag" data-flag="en"></span>English</button>
+        </div>
+      </div>
+      <button class="ic" id="searchBtn" data-al="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+      <button class="ic" id="bellBtn" data-al="service"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18h16"/><path d="M5 18a7 7 0 0 1 14 0"/><path d="M12 11V8"/><path d="M10 8h4"/><path d="M3 21h18"/></svg></button>
+    </div>
+  </div>
+  <img class="logo" src="data:image/png;base64,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" alt="Zur Nürburg — Café | Restaurant" width="669" height="171">
+  <p data-i="intro"></p>
+  <button class="infolink" id="infoBtn"><span id="openNow"></span></button>
+</header>
+
+<nav class="nav">
+  <button class="catbtn" id="catBtn"><span class="lbl" id="catLbl"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+  <div class="seg" role="tablist"><button data-g="food" aria-pressed="true" data-i="food"></button><button data-g="drinks" aria-pressed="false" data-i="drinks"></button></div>
+</nav>
+
+<main id="menu"></main>
+<footer class="note"><span data-i="foot"></span><span class="credit" data-i="credit"></span></footer>
+
+<div class="bar" id="bar"><button id="barBtn"></button></div>
+<div class="veil" id="veil"></div>
+
+<div class="sheet" id="sItem" role="dialog" aria-modal="true">
+  <div class="grab"></div><button class="x" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="body" id="itemBody"></div>
+  <div class="foot"><div class="addrow"><div class="stepper"><button id="qMinus">−</button><span id="qVal">1</span><button id="qPlus">+</button></div><button class="cta" id="addBtn"><span data-i="add"></span><span id="addPrice"></span></button></div></div>
+</div>
+
+<div class="sheet" id="sOrder" role="dialog" aria-modal="true">
+  <div class="grab"></div><button class="x" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="body" id="orderBody"></div>
+  <div class="foot" id="orderFoot"><button class="cta ahr" id="placeBtn" style="width:100%"><span data-i="place"></span><span id="placeTot"></span></button></div>
+</div>
+
+<div class="sheet" id="sSvc" role="dialog" aria-modal="true">
+  <div class="grab"></div><button class="x" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="body"><h2 data-i="service"></h2><p class="desc" id="svcDesc"></p>
+    <div class="svc"><button id="svcWaiter"></button><button id="svcBill"></button></div><div id="svcHist"></div></div>
+</div>
+
+<div class="sheet" id="sCat" role="dialog" aria-modal="true">
+  <div class="grab"></div><button class="x" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="body" id="catBody"></div>
+</div>
+
+<div class="sheet" id="sInfo" role="dialog" aria-modal="true">
+  <div class="grab"></div><button class="x" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="body" id="infoBody"></div>
+</div>
+
+<div class="sheet" id="sSearch" role="dialog" aria-modal="true">
+  <div class="grab"></div><button class="x" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="body" style="min-height:60dvh"><h2 data-i="search"></h2><div class="grp"><input type="search" id="q" autocomplete="off"></div><div id="res" class="res"></div></div>
+</div>
+
+<div class="toast" id="toast"></div>
+</div>
+<script>
+const MENU=[{"g":"food","title":{"nl":"Voorgerechten","de":"Vorspeisen","en":"Starters"},"items":[{"id":1,"n":"101","t":{"nl":"Bruschetta","de":"Bruschetta","en":"Bruschetta"},"d":{"nl":"op geroosterd stokbrood met verse tomaten, uien, knoflook en basilicum op rucola.","de":"auf geröstetem Baguette mit frischen Tomaten, Zwiebeln, Knoblauch und Basilikum auf Rucola.","en":"on toasted baguette with fresh tomatoes, onions, garlic, and basil on arugula."},"v":[{"l":"","p":8.5}],"tags":["vegan"],"ch":{}},{"id":2,"n":"103","t":{"nl":"Carpaccio","de":"Carpaccio","en":"Carpaccio"},"d":{"nl":"Dun gesneden runderfilet met Parmezaanse kaas, rucola en citroen.","de":"hauchdünnes Rinderfilet mit Parmesan, Rucola und Zitrone.","en":"Paper-thin beef fillet with Parmesan, rocket and lemon."},"v":[{"l":"","p":18.5}],"tags":[],"ch":{}},{"id":3,"n":"","t":{"nl":"Gebakken geitenkaas","de":"Gebackener Ziegenkäse","en":"Baked Goat Cheese"},"d":{"nl":"Op rucola en rode biet.","de":"Auf Rucola und Rote Bete.","en":"On arugula and beetroot."},"v":[{"l":"","p":18.5}],"tags":[],"ch":{}},{"id":4,"n":"","t":{"nl":"Antipasti voor 2 personen","de":"Antipasti für 2 Personen","en":"Antipasti for 2 Persons"},"d":{"nl":"Buffelmozzarella met tomaten, Serranoham, bresaola, twee bruschetta's, groenten en kaas.","de":"Büffelmozzarella mit Tomaten, Serrano-Schinken, Bresaola, zwei Bruschette, Gemüse und Käse.","en":"Buffalo mozzarella with tomatoes, Serrano ham, bresaola, two bruschetta, vegetables and cheese."},"v":[{"l":"","p":21.5}],"tags":[],"ch":{}},{"id":5,"n":"104","t":{"nl":"Buffelmozzarella op rucola","de":"Büffelmozzarella auf Rucola","en":"Buffalo mozzarella on arugula"},"d":{"nl":"met balsamico vinaigrette.","de":"mit Balsamico-Vinaigrette.","en":"with balsamic vinaigrette."},"v":[{"l":"","p":15.5}],"tags":["veggie"],"ch":{}}],"subs":[]},{"g":"food","title":{"nl":"Salades","de":"Salate","en":"Salads"},"items":[{"id":6,"n":"","t":{"nl":"Gemengde salade","de":"Gemischter Salat","en":"Mixed Salad"},"d":{"nl":"met zonnebloempitten, pijnboompitten, cherrytomaten, maïs, komkommers, wortelen, rode uien en Parmezaanse kaas.","de":"mit Sonnenblumenkernen, Pinienkernen, Cherrytomaten, Mais, Gurken, Möhren, roten Zwiebeln und Parmesan.","en":"with sunflower seeds, pine nuts, cherry tomatoes, corn, cucumbers, carrots, red onions and Parmesan."},"v":[{"l":"","p":14.5}],"tags":[],"ch":{"nl":[{"n":"Dressing","o":["Balsamico","Yoghurt"]}],"de":[{"n":"Dressing","o":["Balsamico","Joghurt"]}],"en":[{"n":"Dressing","o":["Balsamic","Yoghurt"]}]}},{"id":7,"n":"303","t":{"nl":"Kalkoensalade","de":"Putensalat","en":"Turkey Salad"},"d":{"nl":"Seizoenssalade met zonnebloempitten, croutons en gebakken kalkoenborstreepjes.","de":"Saisonsalat mit Sonnenblumenkernen, Croûtons und gebratenen Putenbruststreifen.","en":"Seasonal salad with sunflower seeds, croutons and sautéed turkey breast strips."},"v":[{"l":"","p":18.5}],"tags":[],"ch":{"nl":[{"n":"Dressing","o":["Balsamico","Yoghurt"]}],"de":[{"n":"Dressing","o":["Balsamico","Joghurt"]}],"en":[{"n":"Dressing","o":["Balsamic","Yoghurt"]}]}},{"id":8,"n":"305","t":{"nl":"Salade \"Zur Nürburg\"","de":"Salat \"Zur Nürburg\"","en":"Salad \"Zur Nürburg\""},"d":{"nl":"Met verse rosbief, zonnebloempitten, pijnboompitten, cherrytomaten, maïs, komkommer, wortel, rode ui en Parmezaanse kaas.","de":"Mit frischem Roastbeef, Sonnenblumenkernen, Pinienkernen, Cherrytomaten, Mais, Gurke, Karotte, roter Zwiebel und Parmesan.","en":"With fresh roast beef, sunflower seeds, pine nuts, cherry tomatoes, corn, cucumber, carrot, red onion and Parmesan."},"v":[{"l":"","p":28.5}],"tags":[],"ch":{"nl":[{"n":"Dressing","o":["Balsamico","Yoghurt"]}],"de":[{"n":"Dressing","o":["Balsamico","Joghurt"]}],"en":[{"n":"Dressing","o":["Balsamic","Yoghurt"]}]}}],"subs":[]},{"g":"food","title":{"nl":"Soepen","de":"Suppen","en":"Soups"},"items":[{"id":9,"n":"202","t":{"nl":"Tomatensoep","de":"Tomatensuppe","en":"Tomato soup"},"d":{"nl":"met een toefje slagroom.","de":"mit Sahnehäubchen.","en":"with a dollop of cream."},"v":[{"l":"","p":7.5}],"tags":["veggie"],"ch":{}},{"id":10,"n":"201","t":{"nl":"Goulashsoep","de":"GULASCHSUPPE","en":"Goulash Soup"},"d":{"nl":"met mals rundvlees, aardappelen, uien en paprika, fijn gekruid op traditionele wijze.","de":"mit zartem Rindfleisch, Kartoffeln, Zwiebeln und Paprika, fein gewürzt nach traditioneller Art.","en":"with tender beef, potatoes, onions and peppers, finely seasoned in a traditional style."},"v":[{"l":"","p":8.5}],"tags":[],"ch":{}}],"subs":[]},{"g":"food","title":{"nl":"Schnitzel","de":"Schnitzel","en":"Schnitzel"},"items":[{"id":11,"n":"401","t":{"nl":"Schnitzel \"Weense stijl\"","de":"Schnitzel \"Wiener Art\"","en":"Schnitzel \"Viennese Style\""},"d":{"nl":"met friet en een kleine bijsalade.","de":"mit Pommes Frites und kleinem Beilagensalat.","en":"with French fries and a small side salad."},"v":[{"l":"","p":19.5}],"tags":[],"ch":{}},{"id":12,"n":"402","t":{"nl":"Schnitzel \"Jagersstijl\"","de":"Schnitzel \"Jäger Art\"","en":"Schnitzel \"Hunter's Style\""},"d":{"nl":"met verse champignonroomsaus, friet en een kleine bijsalade.","de":"mit frischer Champignonrahmsauce Pommes Frites und kleinem Beilagensalat.","en":"with fresh mushroom cream sauce, French fries and a small side salad."},"v":[{"l":"","p":21.5}],"tags":[],"ch":{}},{"id":13,"n":"403","t":{"nl":"Eifelschnitzel","de":"Eifler Schnitzel","en":"Eifler Schnitzel"},"d":{"nl":"met spek, gebakken uien, friet en een kleine bijsalade.","de":"mit Speck, gebratenen Zwiebeln, Pommes Frites und kleinem Beilagensalat.","en":"with bacon, fried onions, french fries and a small side salad."},"v":[{"l":"","p":22.5}],"tags":[],"ch":{}},{"id":14,"n":"405","t":{"nl":"Nürburger Schnitzel","de":"Nürburger Schnitzel","en":"Nürburger Schnitzel"},"d":{"nl":"met spek, twee spiegeleieren, friet en kleine bijsalade.","de":"mit Speck, zwei Spiegeleiern, Pommes und kleinem Beilagensalat.","en":"with bacon, two fried eggs, fries and a small side salad."},"v":[{"l":"","p":22.5}],"tags":[],"ch":{}},{"id":15,"n":"405","t":{"nl":"Kalkoenschnitzel","de":"Putenschnitzel","en":"Turkey Schnitzel"},"d":{"nl":"met amandelkorst, hollandaisesaus, friet en kleine bijsalade.","de":"mit Mandelpanade, Sauce Hollandaise, Pommes und kleinem Beilagensalat.","en":"with almond crust, hollandaise sauce, fries and a small side salad."},"v":[{"l":"","p":23.5}],"tags":[],"ch":{}}],"subs":[]},{"g":"food","title":{"nl":"Vleesgerechten","de":"Fleischgerichte","en":"Meat Dishes"},"items":[{"id":16,"n":"","t":{"nl":"Kasteelpan","de":"Burgpfanne","en":"Castle Pan"},"d":{"nl":"3 Varkenshaasmedaillons met prinsessenbonen in spek, kroketten en peperroomsaus.","de":"3 Schweinelänchen mit Prinzessbohnen im Speck-mantel Kroketen und Pfefferrahmsoße.","en":"3 Pork Tenderloin Medallions with Princess Beans Wrapped in Bacon, Croquettes and Pepper Cream Sauce."},"v":[{"l":"","p":26.5}],"tags":[],"ch":{}}],"subs":[]},{"g":"food","title":{"nl":"Steaks","de":"Steaks","en":"Steaks"},"items":[{"id":17,"n":"502","t":{"nl":"Kalkoenborststeak","de":"Putenbruststeak","en":"Turkey Breast Steak"},"d":{"nl":"Naar keuze met friet, ovenaardappel met zure room of kroketten, en peperroomsaus, champignonsaus, hollandaisesaus of kruidenboter.","de":"Wahlweise mit Pommes, Ofenkartoffel mit Sour Cream oder Kroketten, dazu Pfefferrahm-, Champignon-, Hollandaise-Sauce oder Kräuterbutter.","en":"Choice of fries, baked potato with sour cream or croquettes, with pepper cream, mushroom or hollandaise sauce, or herb butter."},"v":[{"l":"220g","p":24.5},{"l":"320g","p":28.5}],"tags":[],"ch":{"nl":[{"n":"Bijgerecht","o":["Friet","Ovenaardappel met zure room","Kroketten"]},{"n":"Saus","o":["Peperroomsaus","Champignonsaus","Hollandaisesaus","Kruidenboter"]}],"de":[{"n":"Beilage","o":["Pommes","Ofenkartoffel mit Sour Cream","Kroketten"]},{"n":"Sauce","o":["Pfefferrahmsauce","Champignonsauce","Sauce Hollandaise","Kräuterbutter"]}],"en":[{"n":"Side","o":["Fries","Baked potato with sour cream","Croquettes"]},{"n":"Sauce","o":["Pepper cream sauce","Mushroom sauce","Hollandaise","Herb butter"]}]}},{"id":18,"n":"501","t":{"nl":"Argentijnse rumpsteak","de":"Argentinisches Rumpsteak","en":"Argentinian Rump Steak"},"d":{"nl":"Naar keuze met friet, ovenaardappel met zure room of kroketten, en peperroomsaus, champignonsaus, hollandaisesaus of kruidenboter.","de":"Wahlweise mit Pommes, Ofenkartoffel mit Sour Cream oder Kroketten, dazu Pfefferrahm-, Champignon-, Hollandaise-Sauce oder Kräuterbutter.","en":"Choice of fries, baked potato with sour cream or croquettes, with pepper cream, mushroom or hollandaise sauce, or herb butter."},"v":[{"l":"220g","p":32.5},{"l":"330g","p":39.5}],"tags":[],"ch":{"nl":[{"n":"Bijgerecht","o":["Friet","Ovenaardappel met zure room","Kroketten"]},{"n":"Saus","o":["Peperroomsaus","Champignonsaus","Hollandaisesaus","Kruidenboter"]}],"de":[{"n":"Beilage","o":["Pommes","Ofenkartoffel mit Sour Cream","Kroketten"]},{"n":"Sauce","o":["Pfefferrahmsauce","Champignonsauce","Sauce Hollandaise","Kräuterbutter"]}],"en":[{"n":"Side","o":["Fries","Baked potato with sour cream","Croquettes"]},{"n":"Sauce","o":["Pepper cream sauce","Mushroom sauce","Hollandaise","Herb butter"]}]}}],"subs":[]},{"g":"food","title":{"nl":"Pasta","de":"Nudeln","en":"Pasta"},"items":[{"id":19,"n":"1605","t":{"nl":"Penne met spinazie","de":"Penne Spinat","en":"Penne with Spinach"},"d":{"nl":"met spinazie, pijnboompitten en knoflook in roomsaus.","de":"mit Blattspinat, Pinienkernen und Knoblauch in Sahnesauce.","en":"with spinach, pine nuts, and garlic in cream sauce."},"v":[{"l":"","p":15.5}],"tags":["veggie"],"ch":{}},{"id":20,"n":"","t":{"nl":"Penne met kalkoenreepjes","de":"Penne Putenstreifen","en":"Penne with Turkey Strips"},"d":{"nl":"met spinazie, pijnboompitten en knoflook in roomsaus en kalkoenreepjes.","de":"mit Blattspinat, Pinienkernen und Knoblauch in Sahnesauce  und Putenstreifen.","en":"with spinach, pine nuts and garlic in cream sauce and turkey strips."},"v":[{"l":"","p":18.5}],"tags":[],"ch":{}},{"id":21,"n":"1606","t":{"nl":"Penne met zalm","de":"Penne Lachs","en":"Penne Salmon"},"d":{"nl":"met zalm in tomatenroomsaus.","de":"mit Lachs in Tomaten Sahne Soße.","en":"with salmon in tomato cream sauce."},"v":[{"l":"","p":18.5}],"tags":[],"ch":{}}],"subs":[]},{"g":"food","title":{"nl":"Vegetarische gerechten","de":"Vegetarische Gerichte","en":"Vegetarian Dishes"},"items":[{"id":22,"n":"","t":{"nl":"Ovenaardappel","de":"Ofenkartoffel","en":"Baked Potato"},"d":{"nl":"met salade.","de":"mit Salat.","en":"with salad."},"v":[{"l":"","p":14.5}],"tags":["veggie"],"ch":{}},{"id":23,"n":"","t":{"nl":"Kaasschnitzel","de":"Käseschnitzel","en":"Cheese Schnitzel"},"d":{"nl":"met verse cranberrysaus, friet en bijsalade.","de":"mit frischer Preiselbeersoße Pommes Frites und Beilagensalat.","en":"with fresh cranberry sauce, French fries and side salad."},"v":[{"l":"","p":18.5}],"tags":["veggie"],"ch":{}}],"subs":[]},{"g":"food","title":{"nl":"Kindermenu","de":"Kindermenü","en":"Kids' Menu"},"items":[{"id":24,"n":"1601","t":{"nl":"Kinderschnitzel met friet","de":"Kinderschnitzel mit Pommes frittes","en":"Kids' Schnitzel with French Fries"},"d":{"nl":"met een kleine bijsalade.","de":"und kleinem Beilagensalat.","en":"with a small side salad."},"v":[{"l":"","p":10.5}],"tags":[],"ch":{}},{"id":25,"n":"1602","t":{"nl":"Kipnuggets","de":"Chicken Nuggets","en":"Chicken Nuggets"},"d":{"nl":"Met friet.","de":"Mit Pommes Frites.","en":"With French Fries."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{}},{"id":26,"n":"","t":{"nl":"Penne","de":"Penne","en":"Penne"},"d":{"nl":"met tomatenroomsaus.","de":"mit Tomaten-Sahnesauce.","en":"with tomato cream sauce."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{}}],"subs":[]},{"g":"food","title":{"nl":"Bijgerechten & extra's","de":"Beilagen & Extras","en":"Sides & extras"},"items":[{"id":27,"n":"","t":{"nl":"Bijgerecht salade","de":"Beilagensalat","en":"Side Salad"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":5.5}],"tags":[],"ch":{}},{"id":28,"n":"","t":{"nl":"Friet","de":"Pommes Frites","en":"French Fries"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":5.5}],"tags":[],"ch":{}},{"id":29,"n":"","t":{"nl":"Aardappelpartjes","de":"Kartoffelecken","en":"Potato wedges"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":5.5}],"tags":[],"ch":{}},{"id":30,"n":"","t":{"nl":"Ovenaardappel met zure room","de":"Ofenkartoffel mit Sauerrahm","en":"Baked potato with sour cream"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":7.5}],"tags":[],"ch":{}}],"subs":[]},{"g":"food","title":{"nl":"Nagerechten","de":"Desserts","en":"Desserts"},"items":[{"id":31,"n":"","t":{"nl":"Tiramisu","de":"Tiramisu","en":"Tiramisu"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":8.5}],"tags":[],"ch":{}},{"id":32,"n":"1721","t":{"nl":"Warme appelstrudel","de":"Warmer Apfelstrudel","en":"Warm Apple Strudel"},"d":{"nl":"met vanille-ijs en slagroom.","de":"mit Vanilleeis und Sahne.","en":"with vanilla ice cream and whipped cream."},"v":[{"l":"","p":8.5}],"tags":[],"ch":{}},{"id":33,"n":"","t":{"nl":"Klassieke Tartufo","de":"Tartufo clássico","en":"Classic Tartufo"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":8.5}],"tags":[],"ch":{}}],"subs":[]},{"g":"drinks","title":{"nl":"Alcoholvrije dranken","de":"Alkoholfreie Getränke","en":"Non-Alcoholic Drinks"},"items":[{"id":34,"n":"","t":{"nl":"Coca Cola","de":"Coca Cola","en":"Coca Cola"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.2 l","p":3.5},{"l":"0.5 l","p":5.5}],"tags":[],"ch":{}},{"id":35,"n":"","t":{"nl":"Coca Cola Zero","de":"Coca Cola Zero","en":"Coca Cola Zero"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.2 l","p":3.5},{"l":"0.5 l","p":5.5}],"tags":[],"ch":{}},{"id":36,"n":"","t":{"nl":"Fanta","de":"Fanta","en":"Fanta"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.3 l","p":3.5},{"l":"0.5 l","p":5.5}],"tags":[],"ch":{}},{"id":37,"n":"","t":{"nl":"Sprite","de":"Sprite","en":"Sprite"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.3 l","p":3.5},{"l":"0.5 l","p":5.5}],"tags":[],"ch":{}},{"id":38,"n":"","t":{"nl":"Appelsap met spuitwater","de":"Apfelschorle","en":"Apple Spritzer"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.3 l","p":3.5},{"l":"0.5 l","p":5.5}],"tags":[],"ch":{}},{"id":39,"n":"","t":{"nl":"IJsthee","de":"Eistee","en":"Iced Tea"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.25 l","p":3.2}],"tags":[],"ch":{}},{"id":40,"n":"","t":{"nl":"Gerolsteiner Naturel / Medium","de":"Gerolsteiner Naturel /Medium","en":"Gerolsteiner Naturel / Medium"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.25 l","p":2.9},{"l":"0.75 l","p":6.9}],"tags":[],"ch":{}},{"id":41,"n":"","t":{"nl":"Vio Schorle Sinaasappel","de":"Vio Schorle Orange","en":"Vio Orange Spritzer"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.25 l","p":4}],"tags":[],"ch":{}},{"id":42,"n":"","t":{"nl":"VIO Aalbesspritzer","de":"VIO Schorle Johannisbeere","en":"VIO Blackcurrant Spritzer"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.25 l","p":3.8}],"tags":[],"ch":{}},{"id":43,"n":"","t":{"nl":"Appelsap","de":"Apfelsaft","en":"Apple Juice"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.2 l","p":3.5}],"tags":[],"ch":{}},{"id":44,"n":"","t":{"nl":"Sinaasappelsap","de":"Orangensaft","en":"Orange Juice"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.2 l","p":3.5}],"tags":[],"ch":{}},{"id":45,"n":"","t":{"nl":"Schweppes Bitter Lemon / Ginger Ale / Tonic Water","de":"Schweppes Bitter Lemon / Ginger Ale / Tonic Water","en":"Schweppes Bitter Lemon / Ginger Ale / Tonic Water"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.2 l","p":3.5}],"tags":[],"ch":{}}],"subs":[]},{"g":"drinks","title":{"nl":"Warme dranken","de":"Warme Getränke","en":"Hot Drinks"},"items":[{"id":46,"n":"","t":{"nl":"Koffie met room","de":"Café Creme","en":"Espresso with Cream"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":3.5}],"tags":[],"ch":{}},{"id":47,"n":"","t":{"nl":"Grote café crème","de":"Café Creme - Groß","en":"Large Café Crème"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":5.2}],"tags":[],"ch":{}},{"id":48,"n":"","t":{"nl":"Cappuccino - Klein","de":"Cappucchino - Klein","en":"Cappuccino - Small"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":3.8}],"tags":[],"ch":{}},{"id":49,"n":"","t":{"nl":"Cappuccino - Groot","de":"Cappuccino - Groß","en":"Cappuccino - Large"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":4.8}],"tags":[],"ch":{}},{"id":50,"n":"","t":{"nl":"Latte Macchiato","de":"Latte  Macchiato","en":"Latte Macchiato"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":4.8}],"tags":[],"ch":{}},{"id":51,"n":"","t":{"nl":"Grote koffie met melk","de":"Milchkaffee - Groß","en":"Large Latte Macchiato"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":4.8}],"tags":[],"ch":{}},{"id":52,"n":"","t":{"nl":"Espresso","de":"Espresso","en":"Espresso"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":3.5}],"tags":[],"ch":{}},{"id":53,"n":"","t":{"nl":"Dubbele espresso","de":"Espresso - Doppelt","en":"Double Espresso"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":4.5}],"tags":[],"ch":{}},{"id":54,"n":"","t":{"nl":"Warme chocolademelk","de":"Kakao","en":"Hot Chocolate"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":4}],"tags":[],"ch":{}},{"id":55,"n":"","t":{"nl":"Warme chocolademelk met slagroom","de":"Kakao mit Sahne","en":"Hot chocolate with whipped cream"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":4.5}],"tags":[],"ch":{}},{"id":56,"n":"","t":{"nl":"Thee","de":"Tee","en":"Tea"},"d":{"nl":"KEO thee, keuze uit zes soorten.","de":"KEO Tee, sechs Sorten zur Wahl.","en":"KEO tea, six varieties to choose from."},"v":[{"l":"","p":4.5}],"tags":[],"ch":{"nl":[{"n":"Soort","o":["Groene thee","Kruidenthee","Bosthee","Kamille","Zwarte thee","Pepermunt"]}],"de":[{"n":"Sorte","o":["Grüner Tee","Kräutertee","Waldbeere","Kamille","Schwarzer Tee","Pfefferminze"]}],"en":[{"n":"Type","o":["Green tea","Herbal tea","Forest fruit","Chamomile","Black tea","Peppermint"]}]}}],"subs":[]},{"g":"drinks","title":{"nl":"Bar specialiteiten","de":"Bar Spezialitäten","en":"Bar Specialties"},"items":[],"subs":[{"title":{"nl":"Bieren","de":"Biere","en":"Beers"},"items":[{"id":57,"n":"","t":{"nl":"Bitburger van het vat","de":"Bitburger vom Fass","en":"Bitburger on tap"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.3 l","p":3.5},{"l":"0.5 l","p":5.5}],"tags":[],"ch":{}},{"id":58,"n":"","t":{"nl":"Bitburger 0,0%","de":"Bitburger 0,0%","en":"Bitburger 0.0%"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.33 l","p":3.8}],"tags":[],"ch":{}},{"id":59,"n":"","t":{"nl":"Radler","de":"Radler","en":"Shandy"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.3 l","p":3.5},{"l":"0.5 l","p":5.5}],"tags":[],"ch":{}},{"id":60,"n":"","t":{"nl":"Radler 0,0%","de":"Radler 0,0%","en":"Radler 0.0%"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.33 l","p":3.8}],"tags":[],"ch":{}},{"id":61,"n":"","t":{"nl":"Moutbier (alcoholvrij)","de":"Malzbier (alkoholfrei)","en":"Malt Beer (non-alcoholic)"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.33 l","p":3.8}],"tags":[],"ch":{}},{"id":62,"n":"","t":{"nl":"Kölsch van het vat","de":"Kölsch vom Fass","en":"Kölsch on tap"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.2 l","p":3},{"l":"0.4 l","p":5}],"tags":[],"ch":{}},{"id":63,"n":"","t":{"nl":"Erdinger Tarwebier","de":"Erdinger Weizenbier","en":"Erdinger Wheat Beer"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.5 l","p":5.5}],"tags":[],"ch":{}},{"id":64,"n":"","t":{"nl":"Erdinger alcoholvrij","de":"Erdinger alkoholfrei","en":"Erdinger non-alcoholic"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.5 l","p":5.5}],"tags":[],"ch":{}},{"id":65,"n":"","t":{"nl":"Eifelbräu Boerenbier","de":"Eifelbräu Landbier","en":"Eifelbräu Country Beer"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.3 l","p":3.5},{"l":"0.5 l","p":5.5}],"tags":[],"ch":{}}]},{"title":{"nl":"Aperitieven & Cocktails","de":"Aperitifs & Cocktails","en":"Aperitifs & Cocktails"},"items":[{"id":66,"n":"","t":{"nl":"Hugo","de":"Hugo","en":"Hugo"},"d":{"nl":"Munt, Limoen, Vlierbloesemsiroop en Prosecco.","de":"Minze, Limette, Holunderblütensirup und Prosecco.","en":"Mint, Lime, Elderflower Syrup and Prosecco."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{}},{"id":67,"n":"","t":{"nl":"Aperol Spritz","de":"Aperolspritz","en":"Aperol Spritz"},"d":{"nl":"Aperol, Prosecco, Sodawater.","de":"Aperol, Prosecco, Sodawasse.","en":"Aperol, Prosecco, Soda Water."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{}},{"id":68,"n":"","t":{"nl":"Campari Orange","de":"Campari Orange","en":"Campari Orange"},"d":{"nl":"Campari, Sinaasappelsap, Soda.","de":"Campari, Orangensaft, Soda.","en":"Campari, Orange Juice, Soda."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{}},{"id":69,"n":"","t":{"nl":"Wildberry Lillet","de":"Wildberry Lillet","en":"Wildberry Lillet"},"d":{"nl":"Lillet Blanc, Schweppes Wildberry en bosbessen.","de":"Lillet Blanc, Schweppes Wildberry und Waldbeeren.","en":"Lillet Blanc, Schweppes Wildberry and Forest Berries."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{}},{"id":70,"n":"","t":{"nl":"Mojito","de":"Mojito","en":"Mojito"},"d":{"nl":"Rum, Soda, Limoen, Bruine suiker, Munt.","de":"Rum, Soda, Limette, brauner Zucker, Minze.","en":"Rum, Soda, Lime, Brown Sugar, Mint."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{}},{"id":71,"n":"","t":{"nl":"Sex on the Castle","de":"Sex on the Castle","en":"Sex on the Castle"},"d":{"nl":"Wodka, Perziklikeur, Sinaasappels en Cranberrysap.","de":"Wodka, Pdirsichlikör, Orangen und Cranberrysaft.","en":"Vodka, Peach Liqueur, Oranges and Cranberry Juice."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{}},{"id":72,"n":"","t":{"nl":"Martini Bianco","de":"Martini Bianco","en":"Martini Bianco"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":4.5}],"tags":[],"ch":{}},{"id":73,"n":"","t":{"nl":"Cuba Libre","de":"Cuba Libre","en":"Cuba Libre"},"d":{"nl":"Rum, Cola, Limoen.","de":"Rum, Cola, Limette.","en":"Rum, Cola, Lime."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{}}]},{"title":{"nl":"Gemengde dranken","de":"Mixgetränke","en":"Mixed Drinks"},"items":[{"id":74,"n":"","t":{"nl":"Rum","de":"Rum","en":"Rum"},"d":{"nl":"Gemengd naar keuze. Voor bepaalde merken kan een meerprijs gelden.","de":"Gemischt nach Wahl. Für bestimmte Marken kann ein Aufpreis gelten.","en":"Mixed to your liking. Some brands may carry a surcharge."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{"nl":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Sinaasappelsap","Red Bull"]}],"de":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Orangensaft","Red Bull"]}],"en":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Orange juice","Red Bull"]}]}},{"id":75,"n":"","t":{"nl":"Wodka","de":"Wodka","en":"Vodka"},"d":{"nl":"Gemengd naar keuze. Voor bepaalde merken kan een meerprijs gelden.","de":"Gemischt nach Wahl. Für bestimmte Marken kann ein Aufpreis gelten.","en":"Mixed to your liking. Some brands may carry a surcharge."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{"nl":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Sinaasappelsap","Red Bull"]}],"de":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Orangensaft","Red Bull"]}],"en":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Orange juice","Red Bull"]}]}},{"id":76,"n":"","t":{"nl":"Gin","de":"Gin","en":"Gin"},"d":{"nl":"Gemengd naar keuze. Voor bepaalde merken kan een meerprijs gelden.","de":"Gemischt nach Wahl. Für bestimmte Marken kann ein Aufpreis gelten.","en":"Mixed to your liking. Some brands may carry a surcharge."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{"nl":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Sinaasappelsap","Red Bull"]}],"de":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Orangensaft","Red Bull"]}],"en":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Orange juice","Red Bull"]}]}},{"id":77,"n":"","t":{"nl":"Whisky","de":"Whiskey","en":"Whiskey"},"d":{"nl":"Gemengd naar keuze. Voor bepaalde merken kan een meerprijs gelden.","de":"Gemischt nach Wahl. Für bestimmte Marken kann ein Aufpreis gelten.","en":"Mixed to your liking. Some brands may carry a surcharge."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{"nl":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Sinaasappelsap","Red Bull"]}],"de":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Orangensaft","Red Bull"]}],"en":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Orange juice","Red Bull"]}]}},{"id":78,"n":"","t":{"nl":"Brandy","de":"Brandy","en":"Brandy"},"d":{"nl":"Gemengd naar keuze. Voor bepaalde merken kan een meerprijs gelden.","de":"Gemischt nach Wahl. Für bestimmte Marken kann ein Aufpreis gelten.","en":"Mixed to your liking. Some brands may carry a surcharge."},"v":[{"l":"","p":9.5}],"tags":[],"ch":{"nl":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Sinaasappelsap","Red Bull"]}],"de":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Orangensaft","Red Bull"]}],"en":[{"n":"Mixer","o":["Cola","Tonic Water","Bitter Lemon","Orange juice","Red Bull"]}]}}]},{"title":{"nl":"Sterke drank 2cl","de":"Spirituosen 2cl","en":"Spirits 2cl"},"items":[{"id":79,"n":"","t":{"nl":"Jägermeister","de":"Jägermeister","en":"Jägermeister"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3.5}],"tags":[],"ch":{}},{"id":80,"n":"","t":{"nl":"Maltezer","de":"Malteser","en":"Maltese"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3.5}],"tags":[],"ch":{}},{"id":81,"n":"","t":{"nl":"Moormann zwarte bessenlikeur","de":"Moormann Johannisbeerlikör","en":"Moormann Blackcurrant Liqueur"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3.5}],"tags":[],"ch":{}},{"id":82,"n":"","t":{"nl":"Eifelfeuer","de":"Eifelfeuer","en":"Eifelfeuer"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3.5}],"tags":[],"ch":{}},{"id":83,"n":"","t":{"nl":"Eifelgeist","de":"Eifelgeist","en":"Eifel Spirit"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3.5}],"tags":[],"ch":{}},{"id":84,"n":"","t":{"nl":"Basaltvuur","de":"Basaltfeuer","en":"Basalt Fire"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":3.5}],"tags":[],"ch":{}},{"id":85,"n":"","t":{"nl":"Sambuca","de":"Sambucca","en":"Sambuca"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3.5}],"tags":[],"ch":{}},{"id":86,"n":"","t":{"nl":"Ouzo","de":"Ouzo","en":"Ouzo"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3.5}],"tags":[],"ch":{}},{"id":87,"n":"","t":{"nl":"Vruchtenbrandewijn","de":"Obstler","en":"Fruit Brandy"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":2.5}],"tags":[],"ch":{}},{"id":88,"n":"","t":{"nl":"Oude Abrikoos","de":"Alte Marille","en":"Old Apricot"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":4}],"tags":[],"ch":{}},{"id":89,"n":"","t":{"nl":"Williams Peer","de":"Williams Birne","en":"Williams Pear"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":4}],"tags":[],"ch":{}},{"id":90,"n":"","t":{"nl":"Amaretto","de":"Amaretto","en":"Amaretto"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3}],"tags":[],"ch":{}},{"id":91,"n":"","t":{"nl":"Limoncello","de":"Limoncello","en":"Limoncello"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":3}],"tags":[],"ch":{}},{"id":92,"n":"","t":{"nl":"Eierlikeur","de":"Eierlikör","en":"Eggnog"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":3.5}],"tags":[],"ch":{}},{"id":93,"n":"","t":{"nl":"Tequila","de":"Tequila","en":"Tequila"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3}],"tags":[],"ch":{}},{"id":94,"n":"","t":{"nl":"Grappa","de":"Grappa","en":"Grappa"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3.5}],"tags":[],"ch":{}},{"id":95,"n":"","t":{"nl":"Berliner Luft","de":"Berliner Luft","en":"Berliner Luft"},"d":{"nl":"","de":"","en":""},"v":[{"l":"2 c","p":3.5}],"tags":[],"ch":{}}]},{"title":{"nl":"Sterke drank 4cl","de":"Spirituosen 4cl","en":"Spirits 4cl"},"items":[{"id":96,"n":"","t":{"nl":"Fernet - Branca","de":"Fernet - Branca","en":"Fernet - Branca"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":6.5}],"tags":[],"ch":{}},{"id":97,"n":"","t":{"nl":"Ramazzotti","de":"Ramazzotti","en":"Ramazzotti"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":6.5}],"tags":[],"ch":{}},{"id":98,"n":"","t":{"nl":"Averna","de":"Averna","en":"Averna"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":6.5}],"tags":[],"ch":{}},{"id":99,"n":"","t":{"nl":"Baileys","de":"Baileys","en":"Baileys"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":6.5}],"tags":[],"ch":{}},{"id":100,"n":"","t":{"nl":"Chivas 12Y","de":"Chivas 12Y","en":"Chivas 12Y"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":6.5}],"tags":[],"ch":{}},{"id":101,"n":"","t":{"nl":"Talisker 10Y","de":"Talisker 10Y","en":"Talisker 10Y"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":7.5}],"tags":[],"ch":{}},{"id":102,"n":"","t":{"nl":"Skenderbeu Brandy","de":"Skenderbeu Brandy","en":"Skenderbeu Brandy"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":7.5}],"tags":[],"ch":{}},{"id":103,"n":"","t":{"nl":"Carlos I Imperial X.O.","de":"Carlos I Imperial X.O.","en":"Carlos I Imperial X.O."},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":7.5}],"tags":[],"ch":{}},{"id":104,"n":"","t":{"nl":"Meukow V.S.O.P","de":"Meukow V.s.o.p","en":"Meukow V.S.O.P"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":7.5}],"tags":[],"ch":{}},{"id":105,"n":"","t":{"nl":"Henners V.S.","de":"Henners V.S.","en":"Henners V.S."},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":9.5}],"tags":[],"ch":{}},{"id":106,"n":"","t":{"nl":"Hennesy X.O.","de":"Hennesy X.O.","en":"Hennesy X.O."},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":19.59}],"tags":[],"ch":{}}]}]},{"g":"drinks","title":{"nl":"Wijn","de":"Wein","en":"Wine"},"items":[],"subs":[{"title":{"nl":"Glas witte wijn","de":"Weißwein Glass","en":"Glass of White Wine"},"items":[{"id":107,"n":"","t":{"nl":"Blanc de Noir No2","de":"Blanc de Noir No2","en":"Blanc de Noir No2"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.1 l","p":5.5},{"l":"0.2 l","p":8.5},{"l":"0.75 l","p":29.5}],"tags":[],"ch":{}},{"id":108,"n":"","t":{"nl":"Pinot Gris","de":"Grauburgunder","en":"Pinot Gris"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.1 l","p":5.5},{"l":"0.2 l","p":8.5},{"l":"0.75 l","p":29.5}],"tags":[],"ch":{}},{"id":109,"n":"","t":{"nl":"Riesling Spätlese Halfdroog","de":"Riesling Spätlese Halbtrocken","en":"Riesling Spätlese Off-Dry"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.1 l","p":5.5},{"l":"0.2 l","p":8.5},{"l":"0.75 l","p":29.5}],"tags":[],"ch":{}},{"id":110,"n":"","t":{"nl":"Riesling Hochgewächs Droog","de":"Riesling Hochgewächs Trocken","en":"Riesling Hochgewächs Dry"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.1 l","p":5.5},{"l":"0.2 l","p":8.5},{"l":"0.75 l","p":29.5}],"tags":[],"ch":{}},{"id":111,"n":"","t":{"nl":"Roos","de":"Rose","en":"Rose"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.1 l","p":5.5},{"l":"0.2 l","p":8.5},{"l":"0.75 l","p":29.5}],"tags":[],"ch":{}}]},{"title":{"nl":"Glas rode wijn","de":"Rotwein Glass","en":"Red Wine Glass"},"items":[{"id":112,"n":"","t":{"nl":"Graf von are Pinot Noir Droog","de":"Graf von are Spätburgunder Trocken","en":"Graf von are Pinot Noir Dry"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.1 l","p":5.5},{"l":"0.2 l","p":8.5},{"l":"0.75 l","p":29.5}],"tags":[],"ch":{}},{"id":113,"n":"","t":{"nl":"Graf von are Pinot Noir Halfdroog","de":"Graf von are Spätburgunder Halbtrocken","en":"Graf von are Pinot Noir Semi-Dry"},"d":{"nl":"","de":"","en":""},"v":[{"l":"0.1 l","p":5.5},{"l":"0.2 l","p":8.5},{"l":"0.75 l","p":29.5}],"tags":[],"ch":{}}]},{"title":{"nl":"Witte wijn uit Duitsland","de":"Weißwein aus Deutschland","en":"White wine from Germany"},"items":[{"id":114,"n":"","t":{"nl":"Brogsitter Blanc de Noir Pinot Noir No1","de":"Brogsitter Blanc de Noir Spätburgunder No1","en":"Brogsitter Blanc de Noir Pinot Noir No1"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":29.5}],"tags":[],"ch":{}},{"id":115,"n":"","t":{"nl":"Brogsitter Grauburgunder","de":"Brogsitter Grauburgunder","en":"Brogsitter Pinot Gris"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":29.5}],"tags":[],"ch":{}},{"id":116,"n":"","t":{"nl":"Brogsitter Riesling Hochgewächs Droog","de":"Brogsitter Riesling Hochgewächs Trocken","en":"Brogsitter Riesling Hochgewächs Dry"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":29.5}],"tags":[],"ch":{}},{"id":117,"n":"","t":{"nl":"Brogsitter Riesling Trittenheimer Apotheke","de":"Brogsitter Riesling Trittenheimer Apotheke","en":"Brogsitter Riesling Trittenheimer Apotheke"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":29.5}],"tags":[],"ch":{}},{"id":118,"n":"","t":{"nl":"Maximin Grünhaus - Riesling","de":"Maximin Grünhaus - Riesling","en":"Maximin Grünhaus - Riesling"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":36.5}],"tags":[],"ch":{}},{"id":119,"n":"","t":{"nl":"Robert Weil Riesling Droog","de":"Robert Weil Riesling Trocken","en":"Robert Weil Riesling Dry"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":42.5}],"tags":[],"ch":{}}]},{"title":{"nl":"Witte wijn uit Italië","de":"Weißwein aus Italien","en":"White wine from Italy"},"items":[{"id":120,"n":"","t":{"nl":"Kurtatsch Pinot Grigio","de":"Kurtatsch Pinot Grigio","en":"Kurtatsch Pinot Grigio"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":39.59}],"tags":[],"ch":{}},{"id":121,"n":"","t":{"nl":"Ottella Lugana Bianco DOC","de":"Ottella Lugana Bianco DOC","en":"Ottella Lugana Bianco DOC"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":39.5}],"tags":[],"ch":{}}]},{"title":{"nl":"Rode wijn uit Duitsland","de":"Rotwein aus Deutschland","en":"Red wine from Germany"},"items":[{"id":122,"n":"","t":{"nl":"Graf von are Pinot Noir Droog","de":"Graf von are Spätburgunder Trocken","en":"Graf von are Pinot Noir Dry"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":29.5}],"tags":[],"ch":{}},{"id":123,"n":"","t":{"nl":"Graf von are Pinot Noir Halfdroog","de":"Graf von are Spätburgunder Halbtrocken","en":"Graf von are Pinot Noir Semi-Dry"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":29.5}],"tags":[],"ch":{}},{"id":124,"n":"","t":{"nl":"Brogsitter Edition B AHR-Pinot Noir","de":"Brogsitter Edition B AHR-Spätburgunder","en":"Brogsitter Edition B AHR-Pinot Noir"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":35}],"tags":[],"ch":{}}]},{"title":{"nl":"Rode wijn uit Italië","de":"Rotwein aus Italien","en":"Red wine from Italy"},"items":[{"id":125,"n":"","t":{"nl":"San Fabiano Calcinaia Chianti Classico","de":"San Fabiano Calcinaia Chianti Classico","en":"San Fabiano Calcinaia Chianti Classico"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":38.5}],"tags":[],"ch":{}},{"id":126,"n":"","t":{"nl":"Gracciano Della Seta - Vino Nobile Montepuliciano","de":"Gracciano Della Seta - Vino Nobile Montepuliciano","en":"Gracciano Della Seta - Vino Nobile Montepuliciano"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":42}],"tags":[],"ch":{}},{"id":127,"n":"","t":{"nl":"60 Sessantanni — Primitivo di Manduria","de":"60 Sessantanni — Primitivo di Manduria","en":"60 Sessantanni — Primitivo di Manduria"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":59.5}],"tags":[],"ch":{}},{"id":128,"n":"","t":{"nl":"Baglio del Cristo di Campobello — LUSIRA SYRAH","de":"Baglio del Cristo di Campobello — LUSIRA SYRAH","en":"Baglio del Cristo di Campobello — LUSIRA SYRAH"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":89.5}],"tags":[],"ch":{}},{"id":129,"n":"","t":{"nl":"Ornellaia — LE VOLTE","de":"Ornellaia — LE VOLTE","en":"Ornellaia — LE VOLTE"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":95}],"tags":[],"ch":{}},{"id":130,"n":"","t":{"nl":"Bolgheri Superiore — Tenuta ARGENTINIERA","de":"Bolgheri Superiore — Tenuta ARGENTINIERA","en":"Bolgheri Superiore — Tenuta ARGENTINIERA"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":165}],"tags":[],"ch":{}},{"id":131,"n":"","t":{"nl":"Gaja — Ca‘Marcanda PROMIS Toscana","de":"Gaja — Ca‘Marcanda PROMIS Toscana","en":"Gaja — Ca‘Marcanda PROMIS Toscana"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":109}],"tags":[],"ch":{}},{"id":132,"n":"","t":{"nl":"Gaja — Ca‘Marcanda MAGARI","de":"Gaja — Ca‘Marcanda MAGARI","en":"Gaja — Ca‘Marcanda MAGARI"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":145}],"tags":[],"ch":{}},{"id":133,"n":"","t":{"nl":"Marchesi Antinori — TIGNANELLO","de":"Marchesi Antinori — TIGNANELLO","en":"Marchesi Antinori — TIGNANELLO"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":255}],"tags":[],"ch":{}},{"id":134,"n":"","t":{"nl":"Gaja — Ca‘Marcanda Bolgheri","de":"Gaja — Ca‘Marcanda Bolgheri","en":"Gaja — Ca‘Marcanda Bolgheri"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":349}],"tags":[],"ch":{}}]},{"title":{"nl":"Rode wijn uit Chili","de":"Rotwein aus Chile","en":"Red wine from Chile"},"items":[{"id":135,"n":"","t":{"nl":"Valdivieso Carmenere Gran Reserva Valley Selection","de":"Valdivieso Carmenere Gran Reserva Valley Selection","en":"Valdivieso Carmenere Gran Reserva Valley Selection"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":38.5}],"tags":[],"ch":{}}]},{"title":{"nl":"Rode wijn uit Spanje","de":"Rotwein aus Spanien","en":"Red wine from Spain"},"items":[{"id":136,"n":"","t":{"nl":"Conde Valdemar Rioja","de":"Conde Valdemar Rioja","en":"Conde Valdemar Rioja"},"d":{"nl":"","de":"","en":""},"v":[{"l":"","p":39.5}],"tags":[],"ch":{}}]}]}];
+const T={
+ nl:{allerg:'Allergenen of intoleranties? Zet het in de opmerking of vraag het onze medewerkers.',paid:'Betaald',credit:'Gemaakt door LOQIC',fact1:'Hoogstgelegen restaurant van Rijnland-Palts',fact2:'Uitzicht op de Nordschleife',intro:'Aan de voet van de burcht, met uitzicht op de Nordschleife. Bestel direct vanaf je tafel.',info:'Info & contact',openTil:'Vandaag open tot',hours:'Openingstijden',closed:'Gesloten',openNow:'Vandaag open',closedNow:'Vandaag gesloten',days:['Ma','Di','Wo','Do','Vr','Za','Zo'],addr:'Adres',call:'Bellen',route:'Route',more:'Meer bij Zur Nürburg',terr:'Panoramaterras',terrS:'Bij mooi weer, met zicht op de Nordschleife en de Eifel.',party:'Familiefeesten',partyS:'Eigen zaal voor feesten en groepen — vraag ernaar bij het personeel.',stay:'Overnachten',stayS:'Pension op een steenworp van het circuit.',cats:'Kaart',catsS:'Spring naar een categorie',fb:'Facebook',table:'Tafel',sub:'Restaurant · Hotel · Nürburg',food:'Eten',drinks:'Drinken',veg:'Vegetarisch',vegan:'Vegan',all:'Filter',size:'Maat',note:'Opmerking voor de keuken',noteph:'Bijv. zonder ui, saus apart…',add:'Toevoegen',view:'Bekijk bestelling',order:'Jouw bestelling',empty:'Nog niets gekozen. Kies iets uit de kaart om te beginnen.',total:'Totaal',vat:'incl. btw',bring:'Wordt gebracht naar',name:'Naam (optioneel)',nameph:'Zodat we weten voor wie het is',payh:'Betalen',payLater:'Bij de rekening',payLaterS:'Pin of contant aan tafel',payNow:'Nu betalen',payNowS:'Apple Pay, iDEAL, kaart',place:'Bestelling plaatsen',placed:'Bestelling ontvangen',placedS:'De keuken gaat ermee aan de slag. We brengen het naar tafel',orderno:'Bestelnummer',s1:'Ontvangen',s2:'In de keuken',s3:'Onderweg',s4:'Geserveerd',earlier:'Eerder besteld vanavond',service:'Service',svcS:'We komen zo snel mogelijk naar je toe.',waiter:'Ober roepen',waiterS:'Een vraag of extra bestek',bill:'Rekening vragen',billS:'Pinnen of contant',waiterT:'Ober is onderweg',billT:'Rekening komt eraan',waiterH:'Ober geroepen',billH:'Rekening gevraagd',added:'toegevoegd',search:'Zoeken',searchph:'Gerecht, drank of nummer…',noresult:'Niets gevonden.',nofilter:'Geen gerechten in deze categorie met dit filter.',foot:'Alle prijzen in euro, inclusief btw. Vragen over allergenen of ingrediënten? Onze medewerkers helpen je graag — of gebruik de servicebel bovenaan.',from:'vanaf',status:'Bestelling'},
+ de:{allerg:'Allergien oder Unverträglichkeiten? Als Hinweis eintragen oder unser Team fragen.',paid:'Bezahlt',credit:'Erstellt von LOQIC',fact1:'Höchstgelegenes Restaurant in Rheinland-Pfalz',fact2:'Blick auf die Nordschleife',intro:'Am Fuße der Burg, mit Blick auf die Nordschleife. Bestellen Sie direkt vom Tisch aus.',info:'Info & Kontakt',openTil:'Heute geöffnet bis',hours:'Öffnungszeiten',closed:'Geschlossen',openNow:'Heute geöffnet',closedNow:'Heute geschlossen',days:['Mo','Di','Mi','Do','Fr','Sa','So'],addr:'Adresse',call:'Anrufen',route:'Route',more:'Mehr bei Zur Nürburg',terr:'Panoramaterrasse',terrS:'Bei schönem Wetter, mit Blick auf Nordschleife und Eifel.',party:'Familienfeiern',partyS:'Eigener Saal für Feiern und Gruppen — sprechen Sie uns an.',stay:'Übernachten',stayS:'Pension einen Steinwurf von der Rennstrecke.',cats:'Karte',catsS:'Zu einer Kategorie springen',fb:'Facebook',table:'Tisch',sub:'Restaurant · Hotel · Nürburg',food:'Essen',drinks:'Trinken',veg:'Vegetarisch',vegan:'Vegan',all:'Filter',size:'Größe',note:'Hinweis für die Küche',noteph:'z. B. ohne Zwiebeln, Sauce extra…',add:'Hinzufügen',view:'Bestellung ansehen',order:'Ihre Bestellung',empty:'Noch nichts gewählt. Wählen Sie etwas aus der Karte.',total:'Gesamt',vat:'inkl. MwSt.',bring:'Wird gebracht an',name:'Name (optional)',nameph:'Damit wir wissen, für wen es ist',payh:'Bezahlen',payLater:'Mit der Rechnung',payLaterS:'EC-Karte oder bar am Tisch',payNow:'Jetzt bezahlen',payNowS:'Apple Pay, Karte',place:'Bestellung aufgeben',placed:'Bestellung eingegangen',placedS:'Die Küche legt los. Wir bringen es an Tisch',orderno:'Bestellnummer',s1:'Eingegangen',s2:'In der Küche',s3:'Unterwegs',s4:'Serviert',earlier:'Heute bereits bestellt',service:'Service',svcS:'Wir kommen so schnell wie möglich.',waiter:'Kellner rufen',waiterS:'Eine Frage oder extra Besteck',bill:'Rechnung bitte',billS:'Karte oder bar',waiterT:'Kellner ist unterwegs',billT:'Rechnung kommt',waiterH:'Kellner gerufen',billH:'Rechnung angefragt',added:'hinzugefügt',search:'Suchen',searchph:'Gericht, Getränk oder Nummer…',noresult:'Nichts gefunden.',nofilter:'Keine Gerichte in dieser Kategorie mit diesem Filter.',foot:'Alle Preise in Euro inkl. MwSt. Fragen zu Allergenen oder Zutaten? Unser Team hilft gern — oder nutzen Sie die Serviceglocke oben.',from:'ab',status:'Bestellung'},
+ en:{allerg:'Allergies or intolerances? Add a note or ask our staff.',paid:'Paid',credit:'Made by LOQIC',fact1:'Highest restaurant in Rhineland-Palatinate',fact2:'View of the Nordschleife',intro:'At the foot of the castle, overlooking the Nordschleife. Order straight from your table.',info:'Info & contact',openTil:'Open today until',hours:'Opening hours',closed:'Closed',openNow:'Open today',closedNow:'Closed today',days:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],addr:'Address',call:'Call',route:'Directions',more:'More at Zur Nürburg',terr:'Panorama terrace',terrS:'In good weather, overlooking the Nordschleife and the Eifel.',party:'Family celebrations',partyS:'Private room for parties and groups — just ask our staff.',stay:'Stay overnight',stayS:'Guesthouse a stone\'s throw from the track.',cats:'Menu',catsS:'Jump to a category',fb:'Facebook',table:'Table',sub:'Restaurant · Hotel · Nürburg',food:'Food',drinks:'Drinks',veg:'Vegetarian',vegan:'Vegan',all:'Filter',size:'Size',note:'Note for the kitchen',noteph:'e.g. no onions, sauce on the side…',add:'Add',view:'View order',order:'Your order',empty:'Nothing chosen yet. Pick something from the menu to start.',total:'Total',vat:'incl. VAT',bring:'Delivered to',name:'Name (optional)',nameph:'So we know who it\'s for',payh:'Payment',payLater:'With the bill',payLaterS:'Card or cash at the table',payNow:'Pay now',payNowS:'Apple Pay, card',place:'Place order',placed:'Order received',placedS:'The kitchen is on it. We\'ll bring it to table',orderno:'Order number',s1:'Received',s2:'In the kitchen',s3:'On its way',s4:'Served',earlier:'Ordered earlier tonight',service:'Service',svcS:'We\'ll be with you as soon as possible.',waiter:'Call waiter',waiterS:'A question or extra cutlery',bill:'Ask for the bill',billS:'Card or cash',waiterT:'Waiter is on the way',billT:'Bill is coming',waiterH:'Waiter called',billH:'Bill requested',added:'added',search:'Search',searchph:'Dish, drink or number…',noresult:'Nothing found.',nofilter:'No dishes in this category with this filter.',foot:'All prices in euro, incl. VAT. Questions about allergens or ingredients? Our team is happy to help — or use the service bell above.',from:'from',status:'Order'}
+};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const eur=n=>'€ '+n.toFixed(2).replace('.',',');
+const P=new URLSearchParams(location.search);
+const tbl=P.get('t')||'12';
+let lang=(P.get('lang')||navigator.language||'nl').slice(0,2);if(!T[lang])lang='nl';
+const t=k=>T[lang][k];
+const items={};let group='food',filter='';
+const KEY='zn-'+tbl;let cart=[],orders=[];
+try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.d&&Date.now()-s.d<6*3600e3){cart=s.cart||[];orders=(s.orders||[]).map(o=>({...o,step:4}))}}catch(e){}
+const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify({d:Date.now(),cart,orders}))}catch(e){}};
+
+// ---------- flags / language menu ----------
+const FLAG={
+ nl:'<svg viewBox="0 0 30 21"><rect width="30" height="7" fill="#AE1C28"/><rect y="7" width="30" height="7" fill="#fff"/><rect y="14" width="30" height="7" fill="#21468B"/></svg>',
+ de:'<svg viewBox="0 0 30 21"><rect width="30" height="7" fill="#000"/><rect y="7" width="30" height="7" fill="#DD0000"/><rect y="14" width="30" height="7" fill="#FFCE00"/></svg>',
+ en:'<svg viewBox="0 0 30 21"><rect width="30" height="21" fill="#012169"/><path d="M0 0l30 21M30 0L0 21" stroke="#fff" stroke-width="4"/><path d="M0 0l30 21M30 0L0 21" stroke="#C8102E" stroke-width="1.6"/><path d="M15 0v21M0 10.5h30" stroke="#fff" stroke-width="6"/><path d="M15 0v21M0 10.5h30" stroke="#C8102E" stroke-width="3.4"/></svg>'};
+$$('[data-flag]').forEach(e=>e.innerHTML=FLAG[e.dataset.flag]);
+const langMenu=$('#langMenu'),langBtn=$('#langBtn');
+const closeLang=()=>{langMenu.hidden=true;langBtn.setAttribute('aria-expanded','false')};
+langBtn.onclick=e=>{e.stopPropagation();const o=langMenu.hidden;langMenu.hidden=!o;langBtn.setAttribute('aria-expanded',o)};
+document.addEventListener('click',e=>{if(!e.target.closest('.lang'))closeLang()});
+// ---------- i18n ----------
+function applyText(){
+  document.documentElement.lang=lang;
+  $$('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
+  $$('[data-al]').forEach(e=>e.setAttribute('aria-label',t(e.dataset.al)));
+  $('#langFlag').innerHTML=FLAG[lang];$$('.langmenu button').forEach(b=>b.setAttribute('aria-selected',b.dataset.lang===lang));
+  $('#tblNo').textContent=tbl;$('#svcDesc').textContent=`${t('table')} ${tbl}. ${t('svcS')}`;
+  $('#svcWaiter').innerHTML=`${t('waiter')}<small>${t('waiterS')}</small>`;$('#svcBill').innerHTML=`${t('bill')}<small>${t('billS')}</small>`;
+  $('#q').placeholder=t('searchph');
+}
+$$('.langmenu button').forEach(b=>b.onclick=()=>{closeLang();lang=b.dataset.lang;curSec='';applyText();render();if(open==='#sCat')openCats();if(open==='#sInfo')renderInfo()});
+
+// ---------- render ----------
+const TAG={veggie:'V',vegan:'VG'};
+function itemHTML(it){
+  items[it.id]=it;
+  const tags=it.tags.length?`<span class="tags">${it.tags.map(x=>`<span class="tag">${TAG[x]}</span>`).join('')}</span>`:'';
+  const price=it.v.length===1?`<span class="p">${eur(it.v[0].p)}${it.v[0].l?`<small>${it.v[0].l}</small>`:''}</span>`:`<span class="p"><small>${t('from')}</small>${eur(Math.min(...it.v.map(v=>v.p)))}</span>`;
+  const vs=it.v.length>1?`<span class="vs">${it.v.map(v=>`<span><b>${v.l||'—'}</b> ${eur(v.p).slice(2)}</span>`).join('')}</span>`:'';
+  return `<div class="item" data-id="${it.id}" data-tags="${it.tags.join(' ')}">
+    <button class="main" data-open="${it.id}"><span class="t">${it.n?`<span class="n">${it.n}</span>`:''}${it.t[lang]}${tags}</span>${it.d[lang]?`<span class="d">${it.d[lang]}</span>`:''}${vs}</button>
+    <div class="side">${price}<button class="add" data-add="${it.id}" aria-label="${t('add')}">+</button></div></div>`;
+}
+function render(){
+  const menu=$('#menu');
+  menu.innerHTML='';
+  MENU.forEach((c,i)=>{ if(c.g!==group)return;
+    const id='c'+i;
+    let h=`<section class="cat" id="${id}"><h2>${c.title[lang]}</h2>${c.items.map(itemHTML).join('')}`;
+    c.subs.forEach(s=>{h+=`<h3>${s.title[lang]}</h3>${s.items.map(itemHTML).join('')}`});
+    menu.insertAdjacentHTML('beforeend',h+`<div class="empty" hidden>${t('nofilter')}</div></section>`);
+  });
+  applyFilter();syncCart();curSec='';spy();renderInfo();
+}
+function applyFilter(){
+  $$('.item').forEach(el=>{const tg=el.dataset.tags.split(' ');const ok=!filter||tg.includes(filter)||(filter==='veggie'&&tg.includes('vegan'));el.classList.toggle('hidden',!ok)});
+  $$('section.cat').forEach(s=>{s.querySelector('.empty').hidden=s.querySelectorAll('.item:not(.hidden)').length>0});
+}
+$$('.seg button').forEach(b=>b.onclick=()=>{group=b.dataset.g;$$('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));curSec='';render();const nav=$('.nav');if(scrollY>nav.offsetTop)scrollTo({top:nav.offsetTop,behavior:'instant'});spy()});
+let curSec='';
+function spy(){const secs=$$('section.cat');if(!secs.length)return;const y=scrollY+120;let cur=secs[0];for(const s of secs)if(s.offsetTop<=y)cur=s;if(cur.id!==curSec){curSec=cur.id;$('#catLbl').textContent=cur.querySelector('h2').textContent}}
+const ICO={
+ 'Voorgerechten':'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/>',
+ 'Salades':'<path d="M4 13h16a8 8 0 0 1-16 0z"/><path d="M8 13c0-4 2-7 4-8 2 1 4 4 4 8"/>',
+ 'Soepen':'<path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M9 7c0-1 1-1 1-2M13 7c0-1 1-1 1-2"/>',
+ 'Schnitzel':'<path d="M6 8c2-3 8-4 11-1 3 3 1 8-1 10-3 3-9 2-11-1-1-2-1-6 1-8z"/><path d="M9 11h.01M13 9h.01M12 14h.01"/>',
+ 'Vleesgerechten':'<path d="M5 12c0-4 3-7 7-7s8 2 8 6-3 7-7 7-8-2-8-6z"/><path d="M9 12a3 3 0 0 0 6 0"/>',
+ 'Steaks':'<path d="M7 6c3-3 9-3 12 0 2 2 1 5-1 7-2 2-6 3-9 2-3-1-4-6-2-9z"/><path d="M7 15c-2 2-3 4-1 5s4-1 4-3"/>',
+ 'Pasta':'<path d="M4 12h16a8 8 0 0 1-16 0z"/><path d="M6 12c1-5 3-8 6-8s5 3 6 8"/><path d="M12 4v8"/>',
+ 'Vegetarische gerechten':'<path d="M6 21c0-9 5-14 13-15-1 8-6 13-13 15z"/><path d="M6 21c3-5 6-8 10-10"/>',
+ 'Kindermenu':'<path d="M12 3l2.6 5.5 6 .8-4.4 4.2 1.1 6L12 16.6 6.7 19.5l1.1-6L3.4 9.3l6-.8z"/>',
+ "Bijgerechten & extra's":'<path d="M6 10l1.5 11h9L18 10"/><path d="M8 10V4M12 10V3M16 10V4"/><path d="M5 10h14"/>',
+ 'Nagerechten':'<path d="M8 11a4 4 0 0 1 8 0"/><path d="M6 11h12l-6 10z"/>',
+ 'Alcoholvrije dranken':'<path d="M7 4h10l-1 16H8z"/><path d="M8 10h8"/><path d="M12 4l3-2"/>',
+ 'Warme dranken':'<path d="M4 9h12v6a5 5 0 0 1-10 0z"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/><path d="M8 5c0-1 1-1 1-2M12 5c0-1 1-1 1-2"/>',
+ 'Bar specialiteiten':'<path d="M5 4h14l-7 8z"/><path d="M12 12v7M8 19h8"/>',
+ 'Wijn':'<path d="M8 3h8l-1 7a3 3 0 0 1-6 0z"/><path d="M12 13v7M9 20h6"/>'};
+const ico=c=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICO[c.title.nl]||'<circle cx="12" cy="12" r="8"/>'}</svg>`;
+const cnt=c=>c.items.length+c.subs.reduce((a,s)=>a+s.items.length,0);
+function openCats(){
+  let h=`<h2>${t('cats')}</h2><p class="desc">${t('catsS')}</p><div class="cgrid"><button class="filt" data-filt data-state="${filter}"><span>${filter?t(filter==='veggie'?'veg':'vegan'):t('all')}</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20c0-8 4-14 14-15-1 10-6 15-14 15z"/><path d="M5 20c3-5 6-8 10-10"/></svg></button></div>`;
+  ['food','drinks'].forEach(g=>{h+=`<h2 class="grpT">${t(g)}</h2><div class="cgrid">`+MENU.map((c,i)=>c.g!==g?'':`<button data-go="${i}" aria-current="${group===g&&'c'+i===curSec}"><i>${ico(c)}</i><span>${c.title[lang]}<small>${cnt(c)}</small></span></button>`).join('')+`</div>`});
+  $('#catBody').innerHTML=h;$('#catBody').scrollTop=0;show('#sCat');
+}
+$('#catBtn').onclick=openCats;
+$('#catBody').addEventListener('click',e=>{
+  const f=e.target.closest('[data-filt]');if(f){filter=filter===''?'veggie':filter==='veggie'?'vegan':'';render();openCats();return}
+  const b=e.target.closest('[data-go]');if(!b)return;const i=+b.dataset.go;const g=MENU[i].g;
+  if(g!==group){group=g;$$('.seg button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.g===g));render()}
+  hide();requestAnimationFrame(()=>{document.getElementById('c'+i).scrollIntoView({behavior:'smooth',block:'start'})});
+});
+// ---------- info / hours ----------
+const HOURS=[null,null,[17,22],[17,22],[17,22],[12,22],[12,21]]; // Mon..Sun
+const hm=h=>String(h).padStart(2,'0')+':00';
+function renderInfo(){
+  const d=(new Date().getDay()+6)%7;const today=HOURS[d];
+  $('#openNow').textContent=today?`${t('openTil')} ${hm(today[1])} · ${t('info')}`:`${t('closedNow')} · ${t('info')}`;
+  const rows=HOURS.map((h,i)=>`<div class="hrow${i===d?' today':''}"><span>${t('days')[i]}</span><span>${h?`${hm(h[0])} – ${hm(h[1])}`:t('closed')}</span></div>`).join('');
+  $('#infoBody').innerHTML=`<h2>Zur Nürburg</h2><p class="desc">Café | Restaurant · Burgplatz 2, 53520 Nürburg</p>
+  <div class="grp"><div class="gl">${t('hours')}</div><div class="hours">${rows}</div></div>
+  <div class="grp"><div class="ctas"><a href="tel:+4926919399060">${t('call')}<small>02691 939 90 60</small></a><a href="https://maps.google.com/?q=Burgplatz+2,+53520+N%C3%BCrburg" target="_blank" rel="noopener">${t('route')}<small>Burgplatz 2</small></a></div></div>
+  <div class="grp"><div class="gl">${t('more')}</div>
+    <div class="more"><b>${t('terr')}</b><span>${t('terrS')}</span></div>
+    <div class="more"><b>${t('party')}</b><span>${t('partyS')}</span></div>
+    <div class="more"><b>${t('stay')}</b><span>${t('stayS')}</span></div>
+    <div class="more"><b>${t('fb')}</b><span><a href="https://www.facebook.com/zurnuerburg/" target="_blank" rel="noopener">facebook.com/zurnuerburg</a></span></div>
+  </div>`;
+}
+$('#infoBtn').onclick=()=>{renderInfo();show('#sInfo')};
+let tk=false;addEventListener('scroll',()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{tk=false;spy()})},{passive:true});
+
+// ---------- sheets ----------
+const veil=$('#veil');let open=null;
+const show=id=>{if(open&&open!==id)$(open).classList.remove('on');open=id;$(id).classList.add('on');veil.classList.add('on');document.body.style.overflow='hidden'};
+const hide=()=>{if(!open)return;$(open).classList.remove('on');veil.classList.remove('on');document.body.style.overflow='';open=null;$('#q').blur()};
+veil.onclick=hide;$$('[data-close]').forEach(b=>b.onclick=hide);
+$$('.sheet').forEach(sh=>{let y0=null;sh.addEventListener('touchstart',e=>{if(sh.querySelector('.body').scrollTop<=0)y0=e.touches[0].clientY},{passive:true});sh.addEventListener('touchmove',e=>{if(y0!==null&&e.touches[0].clientY-y0>90){y0=null;hide()}},{passive:true})});
+
+// ---------- item ----------
+let cur=null,qty=1,vi=0,ch={};
+document.addEventListener('click',e=>{
+  const o=e.target.closest('[data-open]');if(o){openItem(items[o.dataset.open]);return}
+  const a=e.target.closest('[data-add]');if(a){const it=items[a.dataset.add];if(it.v.length===1&&!it.ch[lang])addLine(it,it.v[0],{},'',1);else openItem(it)}
+});
+function openItem(it){
+  cur=it;qty=1;vi=0;ch={};
+  const groups=it.ch[lang]||[];groups.forEach(g=>ch[g.n]=g.o[0]);
+  let h=`${it.n?`<div class="gl">Nr. ${it.n}</div>`:''}<h2>${it.t[lang]}</h2>${it.d[lang]?`<p class="desc">${it.d[lang]}</p>`:''}`;
+  if(it.v.length>1)h+=`<div class="grp"><div class="gl">${t('size')}</div>${it.v.map((v,i)=>`<button class="opt" role="radio" data-v="${i}" aria-checked="${i===0}"><span class="ol"><span class="dot"></span>${v.l}</span><span>${eur(v.p)}</span></button>`).join('')}</div>`;
+  groups.forEach(g=>{h+=`<div class="grp"><div class="gl">${g.n}</div>${g.o.map((o,i)=>`<button class="opt" role="radio" data-g="${g.n}" data-o="${o}" aria-checked="${i===0}"><span class="ol"><span class="dot"></span>${o}</span></button>`).join('')}</div>`});
+  h+=`<div class="grp"><div class="gl">${t('note')}</div><textarea id="note" placeholder="${t('noteph')}"></textarea></div><p class="desc" style="font-size:13px;margin-top:12px">${t('allerg')}</p>`;
+  $('#itemBody').innerHTML=h;$('#itemBody').scrollTop=0;upd();show('#sItem');
+}
+$('#itemBody').addEventListener('click',e=>{const o=e.target.closest('.opt');if(!o)return;
+  if(o.dataset.v!==undefined){vi=+o.dataset.v;$$('#itemBody .opt[data-v]').forEach(x=>x.setAttribute('aria-checked',x===o))}
+  else{ch[o.dataset.g]=o.dataset.o;$$(`#itemBody .opt[data-g="${o.dataset.g}"]`).forEach(x=>x.setAttribute('aria-checked',x===o))}
+  upd()});
+$('#qMinus').onclick=()=>{qty=Math.max(1,qty-1);upd()};$('#qPlus').onclick=()=>{qty=Math.min(20,qty+1);upd()};
+function upd(){$('#qVal').textContent=qty;$('#addPrice').textContent=eur(cur.v[vi].p*qty)}
+$('#addBtn').onclick=()=>{addLine(cur,cur.v[vi],ch,$('#note').value.trim(),qty);hide()};
+function addLine(it,v,choices,note,q){
+  const sub=[v.l,...Object.values(choices),note].filter(Boolean).join(' · ');
+  const key=it.id+'|'+sub;const ex=cart.find(l=>l.key===key);
+  if(ex)ex.q+=q;else cart.push({key,id:it.id,sub,p:v.p,q});persist();
+  const btn=document.querySelector(`.add[data-add="${it.id}"]`);if(btn){btn.classList.add('bump');setTimeout(()=>btn.classList.remove('bump'),300)}
+  toast(`${q}× ${it.t[lang]} ${t('added')}`);syncCart(true);
+}
+
+// ---------- cart / bar ----------
+let payNow=false,guest='';
+function syncCart(bump){
+  const n=cart.reduce((a,l)=>a+l.q,0),tot=cart.reduce((a,l)=>a+l.p*l.q,0);
+  const last=orders[orders.length-1];const b=$('#barBtn');
+  if(n>0){b.className='';b.innerHTML=`<span class="l"><span class="cnt${bump?' bump':''}">${n}</span>${t('view')}</span><span>${eur(tot)}</span>`}
+  else if(last&&last.step<4){b.className='status';b.innerHTML=`<span class="l"><span class="pulse"></span>${t('status')} ${last.no}</span><span>${t('s'+Math.min(last.step,3))}</span>`}
+  $('#bar').classList.toggle('show',n>0||!!(last&&last.step<4));
+  $('#placeTot').textContent=eur(tot);
+  const q={};cart.forEach(l=>q[l.id]=(q[l.id]||0)+l.q);
+  $$('.add').forEach(a=>{const c=q[a.dataset.add];a.classList.toggle('has',!!c);a.textContent=c?c+'×':'+'});
+}
+$('#barBtn').onclick=()=>{renderOrder();show('#sOrder')};
+function renderOrder(){
+  const tot=cart.reduce((a,l)=>a+l.p*l.q,0);const last=orders[orders.length-1];
+  let h=`<h2>${t('order')}</h2>`;
+  if(!cart.length&&!last)h+=`<p class="desc">${t('empty')}</p>`;
+  if(cart.length){
+    h+=cart.map((l,i)=>`<div class="line"><div class="q"><button data-i="${i}" data-d="-1">−</button><span>${l.q}</span><button data-i="${i}" data-d="1">+</button></div><div><div class="lt">${items[l.id].t[lang]}</div>${l.sub?`<div class="ls">${l.sub}</div>`:''}</div><div class="lp">${eur(l.p*l.q)}</div></div>`).join('');
+    h+=`<div class="tot"><span>${t('total')}<small>${t('vat')}</small></span><span>${eur(tot)}</span></div>
+    <div class="tbl"><span>${t('bring')}</span><b>${t('table')} ${tbl}</b></div>
+    <div class="grp"><div class="gl">${t('name')}</div><input type="text" id="guest" value="${guest}" placeholder="${t('nameph')}"></div>
+    <div class="grp"><div class="gl">${t('payh')}</div><div class="pay"><button class="opt" role="radio" data-pay="0" aria-checked="${!payNow}">${t('payLater')}<small>${t('payLaterS')}</small></button><button class="opt" role="radio" data-pay="1" aria-checked="${payNow}">${t('payNow')}<small>${t('payNowS')}</small></button></div></div>`;
+  }else if(last){h+=statusHTML(last)}
+  const hist=cart.length?orders:orders.slice(0,-1);
+  if(hist.length)h+=`<div class="hist"><div class="gl" style="margin-top:12px">${t('earlier')}</div>${hist.map(o=>`<div class="line simple"><div><div class="lt">${t('status')} ${o.no} — ${t('s'+Math.min(o.step,3))}</div><div class="ls">${o.lines.map(l=>l.q+'× '+items[l.id].t[lang]).join(', ')}</div></div><div class="lp">${eur(o.tot)}</div></div>`).join('')}</div>`;
+  $('#orderBody').innerHTML=h;$('#orderFoot').hidden=!cart.length;
+}
+function statusHTML(o){
+  const st=[1,2,3].map(i=>`<div class="step ${o.step>i?'done':o.step===i?'cur':''}"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></i>${t('s'+i)}</div>`).join('');
+  return `<div class="done"><h2>${o.step>=4?t('s4'):o.step===3?t('s3'):t('placed')}</h2><p>${t('placedS')} ${tbl}.</p><div class="num">${t('orderno')}<b>${o.no}</b></div>${o.payNow?`<div class="num" style="margin-left:6px;color:var(--green);background:var(--green-soft)">${t('paid')} ✓</div>`:''}
+  <div class="steps" style="--pg:${(Math.min(o.step,3)-1)/2}">${st}</div>
+  <div class="hist">${o.lines.map(l=>`<div class="line simple"><div><div class="lt">${l.q}× ${items[l.id].t[lang]}</div>${l.sub?`<div class="ls">${l.sub}</div>`:''}</div><div class="lp">${eur(l.p*l.q)}</div></div>`).join('')}<div class="tot"><span>${t('total')}</span><span>${eur(o.tot)}</span></div></div></div>`;
+}
+$('#orderBody').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-i]');if(b){const i=+b.dataset.i;cart[i].q+=+b.dataset.d;if(cart[i].q<=0)cart.splice(i,1);persist();syncCart();renderOrder();return}
+  const p=e.target.closest('[data-pay]');if(p){payNow=p.dataset.pay==='1';$$('#orderBody [data-pay]').forEach(x=>x.setAttribute('aria-checked',x===p))}
+});
+$('#orderBody').addEventListener('input',e=>{if(e.target.id==='guest')guest=e.target.value});
+$('#placeBtn').onclick=()=>{
+  const no=`${tbl}-${String(orders.length+1).padStart(2,'0')}`;
+  const o={no,lines:cart.map(l=>({...l})),tot:cart.reduce((a,l)=>a+l.p*l.q,0),step:1,guest,payNow};
+  orders.push(o);cart.length=0;persist();
+  // demo: simulated kitchen progress
+  const adv=(s,ms)=>setTimeout(()=>{o.step=s;syncCart();if(open==='#sOrder'&&!cart.length)renderOrder();if(s===3)toast(`${t('status')} ${no}: ${t('s3')}`)},ms);
+  adv(2,5000);adv(3,14000);adv(4,30000);
+  syncCart();renderOrder();$('#orderBody').scrollTop=0;
+};
+
+// ---------- service ----------
+$('#bellBtn').onclick=()=>show('#sSvc');
+const svc=(btn,msg,lbl)=>{btn.classList.add('on');btn.disabled=true;$('#svcHist').insertAdjacentHTML('afterbegin',`<div class="line simple" style="margin-top:8px"><div class="lt">${lbl}</div><div class="ls">${new Date().toLocaleTimeString(lang,{hour:'2-digit',minute:'2-digit'})}</div></div>`);hide();toast(msg);setTimeout(()=>{btn.classList.remove('on');btn.disabled=false},60000)};
+$('#svcWaiter').onclick=()=>svc($('#svcWaiter'),t('waiterT'),t('waiterH'));
+$('#svcBill').onclick=()=>svc($('#svcBill'),t('billT'),t('billH'));
+
+// ---------- search ----------
+$('#searchBtn').onclick=()=>{show('#sSearch');$('#q').value='';$('#res').innerHTML='';setTimeout(()=>$('#q').focus(),350)};
+$('#q').addEventListener('input',()=>{
+  const q=$('#q').value.trim().toLowerCase();const r=$('#res');if(q.length<2){r.innerHTML='';return}
+  const hits=Object.values(items).filter(it=>it.t[lang].toLowerCase().includes(q)||it.d[lang].toLowerCase().includes(q)||it.n===q).slice(0,25);
+  r.innerHTML=hits.length?hits.map(itemHTML).join(''):`<p class="desc">${t('noresult')}</p>`;syncCart();
+});
+
+let tt;function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('on'),2200)}
+
+applyText();render();renderInfo();
+</script>
+</body>
+</html>
